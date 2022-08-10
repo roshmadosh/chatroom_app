@@ -1,0 +1,16 @@
+@use 'variables/fonts' as fonts;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: fonts.$ff-general;
+}
+
+body {
+  font-size: 1.6rem;
+}

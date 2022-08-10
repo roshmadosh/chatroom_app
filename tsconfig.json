@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    // prevents me from having to import React in every .jsx/.tsx file
+    "jsx": "react-jsx",
+  },
+}

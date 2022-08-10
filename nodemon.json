@@ -1,0 +1,6 @@
+{
+  "events": {
+      "restart": "node src/builder.js",
+      "start": "node src/builder.js"
+    }
+ }
