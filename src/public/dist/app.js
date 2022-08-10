@@ -990,7 +990,7 @@
             }
             return dispatcher;
           }
-          function useContext3(Context) {
+          function useContext2(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1028,7 +1028,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback(callback, deps) {
+          function useCallback2(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -1792,8 +1792,8 @@
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback;
-          exports.useContext = useContext3;
+          exports.useCallback = useCallback2;
+          exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect;
@@ -26000,45 +26000,64 @@
     connect: lookup2
   });
 
-  // src/hooks/useSocket.tsx
+  // src/hooks/_useSockets.tsx
+  var import_react2 = __toESM(require_react());
+
+  // src/contexts/index.ts
   var import_react = __toESM(require_react());
-  var import_jsx_runtime = __toESM(require_jsx_runtime());
   var SocketContext = (0, import_react.createContext)(void 0);
-  function useSocket(path) {
-    const socket = lookup2(path);
+
+  // src/hooks/_useSockets.tsx
+  var import_jsx_runtime = __toESM(require_jsx_runtime());
+  function useSockets(initialSockets) {
+    const store = {
+      mainSocket: (0, import_react2.useCallback)(() => lookup2(), [])()
+    };
+    initialSockets && addSockets(initialSockets);
+    function addSockets(sockets) {
+      sockets.forEach((socket) => {
+        store[socket.name] = (0, import_react2.useCallback)(() => lookup2(socket.path), [])();
+      });
+    }
     const SocketProvider = ({ children }) => {
       return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocketContext.Provider, {
-        value: socket,
+        value: { addSockets, store },
         children
       });
     };
-    return SocketProvider;
+    return {
+      addSockets,
+      SocketProvider
+    };
   }
 
-  // src/components/Message.tsx
-  var import_react2 = __toESM(require_react());
+  // src/components/_Room.tsx
+  var import_react3 = __toESM(require_react());
   var import_jsx_runtime = __toESM(require_jsx_runtime());
-  function Message() {
-    const [message, setMessage] = (0, import_react2.useState)("");
-    const [messages, setMessages] = (0, import_react2.useState)([]);
-    const [isEmpty, setIsEmpty] = (0, import_react2.useState)(false);
-    const socket = (0, import_react2.useContext)(SocketContext);
+  function Room() {
+    const [message, setMessage] = (0, import_react3.useState)("");
+    const [messages, setMessages] = (0, import_react3.useState)([]);
+    const [isEmpty, setIsEmpty] = (0, import_react3.useState)(false);
+    const { store: { mainSocket } } = (0, import_react3.useContext)(SocketContext);
     const onSendMessage = (e) => {
       e.preventDefault();
       if (!message) {
         setIsEmpty(true);
       } else {
-        socket.emit("chat message", message);
+        mainSocket.emit("chat message", message);
         setIsEmpty(false);
         setMessage("");
       }
     };
-    socket.on("chat message", (msg) => {
-      const updated = [...messages, { createdAt: new Date().toLocaleTimeString(), value: msg }];
+    mainSocket.on("chat message", (msg) => {
+      const updated = [
+        ...messages,
+        { createdAt: new Date().toLocaleTimeString(), value: msg }
+      ];
       setMessages(updated);
     });
     return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-      action: "",
+      onSubmit: onSendMessage,
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
           id: "messages",
@@ -26051,11 +26070,11 @@
           children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
               type: "text",
-              required: true,
+              name: "message",
+              value: message,
               onChange: (e) => setMessage(e.target.value)
             }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-              onClick: onSendMessage,
               children: "Send Message"
             }),
             isEmpty && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
@@ -26071,9 +26090,9 @@
   // src/app.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   var App = () => {
-    const SocketProvider = useSocket();
+    const { SocketProvider } = useSockets();
     return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocketProvider, {
-      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Message, {})
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Room, {})
     });
   };
   var root = (0, import_client.createRoot)(document.getElementById("root"));

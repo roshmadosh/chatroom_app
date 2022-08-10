@@ -1,15 +1,15 @@
 import { createRoot } from 'react-dom/client';
-import { useSocket } from './hooks/useSocket';
-import { Message } from './components/Message';
+import { useSockets } from './hooks';
+import { Room } from './components';
 import './scss/main.scss';
 
 
 const App = () => {
-  const SocketProvider = useSocket();
+  const { SocketProvider } = useSockets();
 
   return (
     <SocketProvider>
-      <Message />
+      <Room />
     </SocketProvider>
   )
 }
