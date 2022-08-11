@@ -3,8 +3,22 @@
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __propIsEnum = Object.prototype.propertyIsEnumerable;
+  var __defNormalProp = (obj, key, value2) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value: value2 }) : obj[key] = value2;
+  var __spreadValues = (a, b) => {
+    for (var prop in b || (b = {}))
+      if (__hasOwnProp.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    if (__getOwnPropSymbols)
+      for (var prop of __getOwnPropSymbols(b)) {
+        if (__propIsEnum.call(b, prop))
+          __defNormalProp(a, prop, b[prop]);
+      }
+    return a;
+  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -990,7 +1004,7 @@
             }
             return dispatcher;
           }
-          function useContext2(Context) {
+          function useContext3(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1004,7 +1018,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState2(initialState) {
+          function useState3(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1793,7 +1807,7 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback2;
-          exports.useContext = useContext2;
+          exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect;
@@ -1804,7 +1818,7 @@
           exports.useMemo = useMemo;
           exports.useReducer = useReducer;
           exports.useRef = useRef;
-          exports.useState = useState2;
+          exports.useState = useState3;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -23759,11 +23773,11 @@
               return jsxWithValidation(type, props, key, false);
             }
           }
-          var jsx4 = jsxWithValidationDynamic;
-          var jsxs2 = jsxWithValidationStatic;
+          var jsx6 = jsxWithValidationDynamic;
+          var jsxs4 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
-          exports.jsx = jsx4;
-          exports.jsxs = jsxs2;
+          exports.jsx = jsx6;
+          exports.jsxs = jsxs4;
         })();
       }
     }
@@ -26026,62 +26040,100 @@
       });
     };
     return {
-      addSockets,
       SocketProvider
     };
   }
 
-  // src/components/_Room.tsx
+  // src/components/room/index.tsx
   var import_react3 = __toESM(require_react());
   var import_jsx_runtime = __toESM(require_jsx_runtime());
-  function Room() {
-    const [message, setMessage] = (0, import_react3.useState)("");
-    const [messages, setMessages] = (0, import_react3.useState)([]);
-    const [isEmpty, setIsEmpty] = (0, import_react3.useState)(false);
-    const { store: { mainSocket } } = (0, import_react3.useContext)(SocketContext);
-    const onSendMessage = (e) => {
-      e.preventDefault();
-      if (!message) {
-        setIsEmpty(true);
-      } else {
-        mainSocket.emit("chat message", message);
-        setIsEmpty(false);
-        setMessage("");
-      }
-    };
-    mainSocket.on("chat message", (msg) => {
-      const updated = [
-        ...messages,
-        { createdAt: new Date().toLocaleTimeString(), value: msg }
-      ];
-      setMessages(updated);
-    });
+
+  // src/components/lobby/index.tsx
+  var import_react4 = __toESM(require_react());
+
+  // src/components/lobby/_addRoom.tsx
+  var import_jsx_runtime = __toESM(require_jsx_runtime());
+  function AddRoomForm({ onSubmit, roomName, setRoomName, error }) {
     return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-      onSubmit: onSendMessage,
+      id: "add-room-form",
+      onSubmit,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-          id: "messages",
-          children: messages.map((message2) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-            children: `${message2.createdAt}: ${message2.value}`
-          }))
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+          children: "Add a chatroom."
         }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-          id: "submit-container",
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-              type: "text",
-              name: "message",
-              value: message,
-              onChange: (e) => setMessage(e.target.value)
-            }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-              children: "Send Message"
-            }),
-            isEmpty && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-              className: "error-message",
-              children: "Cannot be empty."
-            })
-          ]
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+          htmlFor: "chatroom-name",
+          children: "Name:"
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+          type: "text",
+          id: "chatroom-name",
+          value: roomName,
+          onChange: (e) => setRoomName(e.target.value)
+        }),
+        error.emptyRoomDetails && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+          children: "Room name cannot be empty."
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+          children: "Add"
+        })
+      ]
+    });
+  }
+
+  // src/components/lobby/index.tsx
+  var import_jsx_runtime = __toESM(require_jsx_runtime());
+  function Lobby() {
+    const [roomName, setRoomName] = (0, import_react4.useState)("");
+    const [rooms, setRooms] = (0, import_react4.useState)([]);
+    const [error, setError] = (0, import_react4.useState)({ emptyRoomDetails: false });
+    const { store: { mainSocket }, addSockets } = (0, import_react4.useContext)(SocketContext);
+    const onAddRoom = (e) => {
+      e.preventDefault();
+      if (!roomName) {
+        setError({ emptyRoomDetails: true });
+        return;
+      }
+      const roomDetails = { roomName, creator: "User1", createdAt: new Date().toLocaleString(), occupants: 0 };
+      mainSocket.emit("add room", roomDetails);
+      setRooms([...rooms, roomDetails]);
+      setRoomName("");
+      setError({ emptyRoomDetails: false });
+    };
+    mainSocket.on("add room", (roomDetails) => {
+      setRooms([...rooms, __spreadValues({}, roomDetails)]);
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+      id: "lobby-page",
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AddRoomForm, {
+          error,
+          roomName,
+          setRoomName,
+          onSubmit: onAddRoom
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+          id: "lobby-chatrooms",
+          children: rooms.map((room) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+            className: "lobby-chatroom",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+                children: room.roomName
+              }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+                children: [
+                  "Created at: ",
+                  room.createdAt
+                ]
+              }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+                children: [
+                  "Occupants: ",
+                  room.occupants
+                ]
+              })
+            ]
+          }))
         })
       ]
     });
@@ -26092,7 +26144,7 @@
   var App = () => {
     const { SocketProvider } = useSockets();
     return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocketProvider, {
-      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Room, {})
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lobby, {})
     });
   };
   var root = (0, import_client.createRoot)(document.getElementById("root"));

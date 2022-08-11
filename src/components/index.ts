@@ -1,6 +1,8 @@
-import { Room } from "./_Room";
+import { Room } from "./room";
+import { Lobby } from "./lobby";
 
 
 export {
-  Room
+  Room,
+  Lobby,
 }

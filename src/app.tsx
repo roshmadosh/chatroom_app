@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { useSockets } from './hooks';
-import { Room } from './components';
+import { Lobby } from './components';
 import './scss/main.scss';
 
 
@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <SocketProvider>
-      <Room />
+      <Lobby />
     </SocketProvider>
   )
 }

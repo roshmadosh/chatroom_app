@@ -6,7 +6,7 @@ import { SocketType } from '../types';
 
 
 /**
- * Creates web sockets. Returns a function for adding sockets, as well as a context provider for the sockets.
+ * Creates web sockets and a context for accessing and updating them. Returns the provider for the context.
  * @param initialSockets // for additional namespaces
  * @returns 
  */
@@ -37,7 +37,6 @@ export function useSockets(initialSockets?: SocketType[]) {
 
   // --[RETURN]-- //
   return {
-    addSockets,
     SocketProvider
   }
 }

@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, 'src/public')));
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.on('chat message', message => {
-    io.emit('chat message', message);
+  socket.on('add room', roomDetails => {
+    socket.broadcast.emit('add room', roomDetails);
   });
 });
 

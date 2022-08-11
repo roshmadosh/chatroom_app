@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { SocketContext } from '../contexts';
+import { SocketContext } from '../../contexts';
 
 type DisplayedMessageType = {
   createdAt: string,
