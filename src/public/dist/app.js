@@ -465,7 +465,7 @@
             }
             return element;
           };
-          function createElement(type, config, children) {
+          function createElement3(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -581,7 +581,7 @@
             }
             return ReactElement(element.type, key, ref, self2, source, owner, props);
           }
-          function isValidElement(object) {
+          function isValidElement2(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           var SEPARATOR2 = ".";
@@ -646,7 +646,7 @@
                   return c;
                 });
               } else if (mappedChild != null) {
-                if (isValidElement(mappedChild)) {
+                if (isValidElement2(mappedChild)) {
                   {
                     if (mappedChild.key && (!_child || _child.key !== mappedChild.key)) {
                       checkKeyStringCoercion(mappedChild.key);
@@ -727,12 +727,12 @@
             }) || [];
           }
           function onlyChild(children) {
-            if (!isValidElement(children)) {
+            if (!isValidElement2(children)) {
               throw new Error("React.Children.only expected to receive a single React element child.");
             }
             return children;
           }
-          function createContext2(defaultValue) {
+          function createContext3(defaultValue) {
             var context = {
               $$typeof: REACT_CONTEXT_TYPE,
               _currentValue: defaultValue,
@@ -909,7 +909,7 @@
             }
             return lazyType;
           }
-          function forwardRef(render) {
+          function forwardRef2(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1004,7 +1004,7 @@
             }
             return dispatcher;
           }
-          function useContext3(Context) {
+          function useContext4(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1018,7 +1018,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState3(initialState) {
+          function useState5(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1026,11 +1026,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef(initialValue) {
+          function useRef3(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect(create, deps) {
+          function useEffect2(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1038,15 +1038,15 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useInsertionEffect(create, deps);
           }
-          function useLayoutEffect(create, deps) {
+          function useLayoutEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback2(callback, deps) {
+          function useCallback4(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo(create, deps) {
+          function useMemo3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1444,11 +1444,11 @@
             if (isArray(node)) {
               for (var i2 = 0; i2 < node.length; i2++) {
                 var child = node[i2];
-                if (isValidElement(child)) {
+                if (isValidElement2(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement(node)) {
+            } else if (isValidElement2(node)) {
               if (node._store) {
                 node._store.validated = true;
               }
@@ -1459,7 +1459,7 @@
                   var iterator = iteratorFn.call(node);
                   var step;
                   while (!(step = iterator.next()).done) {
-                    if (isValidElement(step.value)) {
+                    if (isValidElement2(step.value)) {
                       validateExplicitKey(step.value, parentType);
                     }
                   }
@@ -1541,7 +1541,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement.apply(this, arguments);
+            var element = createElement3.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1780,14 +1780,14 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children = {
+          var Children2 = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray,
             only: onlyChild
           };
-          exports.Children = Children;
+          exports.Children = Children2;
           exports.Component = Component;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
@@ -1796,29 +1796,29 @@
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext2;
+          exports.createContext = createContext3;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef;
-          exports.isValidElement = isValidElement;
+          exports.forwardRef = forwardRef2;
+          exports.isValidElement = isValidElement2;
           exports.lazy = lazy;
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback2;
-          exports.useContext = useContext3;
+          exports.useCallback = useCallback4;
+          exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect;
+          exports.useEffect = useEffect2;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
-          exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo;
+          exports.useLayoutEffect = useLayoutEffect3;
+          exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
-          exports.useRef = useRef;
-          exports.useState = useState3;
+          exports.useRef = useRef3;
+          exports.useState = useState5;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2365,7 +2365,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment = 7;
+          var Fragment2 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3442,7 +3442,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment:
+              case Fragment2:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -8970,7 +8970,7 @@
               }
             }
           }
-          function createElement(type, props, rootContainerElement, parentNamespace) {
+          function createElement3(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9822,7 +9822,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -12807,7 +12807,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment) {
+              if (current2 === null || current2.tag !== Fragment2) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -13209,7 +13209,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment) {
+                    if (child.tag === Fragment2) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -17315,7 +17315,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment:
+              case Fragment2:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -17587,7 +17587,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment:
+              case Fragment2:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -21801,7 +21801,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment, elements, key, mode);
+            var fiber = createFiber(Fragment2, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -23568,7 +23568,7 @@
           {
             propTypesMisspellWarningShown = false;
           }
-          function isValidElement(object) {
+          function isValidElement2(object) {
             {
               return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
             }
@@ -23635,11 +23635,11 @@
               if (isArray(node)) {
                 for (var i2 = 0; i2 < node.length; i2++) {
                   var child = node[i2];
-                  if (isValidElement(child)) {
+                  if (isValidElement2(child)) {
                     validateExplicitKey(child, parentType);
                   }
                 }
-              } else if (isValidElement(node)) {
+              } else if (isValidElement2(node)) {
                 if (node._store) {
                   node._store.validated = true;
                 }
@@ -23650,7 +23650,7 @@
                     var iterator = iteratorFn.call(node);
                     var step;
                     while (!(step = iterator.next()).done) {
-                      if (isValidElement(step.value)) {
+                      if (isValidElement2(step.value)) {
                         validateExplicitKey(step.value, parentType);
                       }
                     }
@@ -23774,10 +23774,10 @@
             }
           }
           var jsx6 = jsxWithValidationDynamic;
-          var jsxs4 = jsxWithValidationStatic;
+          var jsxs5 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.jsx = jsx6;
-          exports.jsxs = jsxs4;
+          exports.jsxs = jsxs5;
         })();
       }
     }
@@ -26024,10 +26024,10 @@
   // src/hooks/_useSockets.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   function useSockets(initialSockets) {
+    initialSockets && addSockets(initialSockets);
     const store = {
       mainSocket: (0, import_react2.useCallback)(() => lookup2(), [])()
     };
-    initialSockets && addSockets(initialSockets);
     function addSockets(sockets) {
       sockets.forEach((socket) => {
         store[socket.name] = (0, import_react2.useCallback)(() => lookup2(socket.path), [])();
@@ -26035,7 +26035,7 @@
     }
     const SocketProvider = ({ children }) => {
       return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocketContext.Provider, {
-        value: { addSockets, store },
+        value: { store, addSockets },
         children
       });
     };
@@ -26045,11 +26045,1035 @@
   }
 
   // src/components/room/index.tsx
+  var import_react5 = __toESM(require_react());
+
+  // node_modules/react-router-dom/index.js
+  var import_react4 = __toESM(require_react());
+
+  // node_modules/@babel/runtime/helpers/esm/extends.js
+  function _extends() {
+    _extends = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends.apply(this, arguments);
+  }
+
+  // node_modules/history/index.js
+  var Action;
+  (function(Action2) {
+    Action2["Pop"] = "POP";
+    Action2["Push"] = "PUSH";
+    Action2["Replace"] = "REPLACE";
+  })(Action || (Action = {}));
+  var readOnly = true ? function(obj) {
+    return Object.freeze(obj);
+  } : function(obj) {
+    return obj;
+  };
+  function warning(cond, message) {
+    if (!cond) {
+      if (typeof console !== "undefined")
+        console.warn(message);
+      try {
+        throw new Error(message);
+      } catch (e) {
+      }
+    }
+  }
+  var BeforeUnloadEventType = "beforeunload";
+  var PopStateEventType = "popstate";
+  function createBrowserHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    var _options = options, _options$window = _options.window, window2 = _options$window === void 0 ? document.defaultView : _options$window;
+    var globalHistory = window2.history;
+    function getIndexAndLocation() {
+      var _window$location = window2.location, pathname = _window$location.pathname, search = _window$location.search, hash = _window$location.hash;
+      var state = globalHistory.state || {};
+      return [state.idx, readOnly({
+        pathname,
+        search,
+        hash,
+        state: state.usr || null,
+        key: state.key || "default"
+      })];
+    }
+    var blockedPopTx = null;
+    function handlePop() {
+      if (blockedPopTx) {
+        blockers.call(blockedPopTx);
+        blockedPopTx = null;
+      } else {
+        var nextAction = Action.Pop;
+        var _getIndexAndLocation = getIndexAndLocation(), nextIndex = _getIndexAndLocation[0], nextLocation = _getIndexAndLocation[1];
+        if (blockers.length) {
+          if (nextIndex != null) {
+            var delta = index - nextIndex;
+            if (delta) {
+              blockedPopTx = {
+                action: nextAction,
+                location: nextLocation,
+                retry: function retry() {
+                  go(delta * -1);
+                }
+              };
+              go(delta);
+            }
+          } else {
+            true ? warning(
+              false,
+              "You are trying to block a POP navigation to a location that was not created by the history library. The block will fail silently in production, but in general you should do all navigation with the history library (instead of using window.history.pushState directly) to avoid this situation."
+            ) : void 0;
+          }
+        } else {
+          applyTx(nextAction);
+        }
+      }
+    }
+    window2.addEventListener(PopStateEventType, handlePop);
+    var action = Action.Pop;
+    var _getIndexAndLocation2 = getIndexAndLocation(), index = _getIndexAndLocation2[0], location2 = _getIndexAndLocation2[1];
+    var listeners = createEvents();
+    var blockers = createEvents();
+    if (index == null) {
+      index = 0;
+      globalHistory.replaceState(_extends({}, globalHistory.state, {
+        idx: index
+      }), "");
+    }
+    function createHref(to) {
+      return typeof to === "string" ? to : createPath(to);
+    }
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+      return readOnly(_extends({
+        pathname: location2.pathname,
+        hash: "",
+        search: ""
+      }, typeof to === "string" ? parsePath(to) : to, {
+        state,
+        key: createKey()
+      }));
+    }
+    function getHistoryStateAndUrl(nextLocation, index2) {
+      return [{
+        usr: nextLocation.state,
+        key: nextLocation.key,
+        idx: index2
+      }, createHref(nextLocation)];
+    }
+    function allowTx(action2, location3, retry) {
+      return !blockers.length || (blockers.call({
+        action: action2,
+        location: location3,
+        retry
+      }), false);
+    }
+    function applyTx(nextAction) {
+      action = nextAction;
+      var _getIndexAndLocation3 = getIndexAndLocation();
+      index = _getIndexAndLocation3[0];
+      location2 = _getIndexAndLocation3[1];
+      listeners.call({
+        action,
+        location: location2
+      });
+    }
+    function push(to, state) {
+      var nextAction = Action.Push;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        push(to, state);
+      }
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr = getHistoryStateAndUrl(nextLocation, index + 1), historyState = _getHistoryStateAndUr[0], url2 = _getHistoryStateAndUr[1];
+        try {
+          globalHistory.pushState(historyState, "", url2);
+        } catch (error) {
+          window2.location.assign(url2);
+        }
+        applyTx(nextAction);
+      }
+    }
+    function replace(to, state) {
+      var nextAction = Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        replace(to, state);
+      }
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr2 = getHistoryStateAndUrl(nextLocation, index), historyState = _getHistoryStateAndUr2[0], url2 = _getHistoryStateAndUr2[1];
+        globalHistory.replaceState(historyState, "", url2);
+        applyTx(nextAction);
+      }
+    }
+    function go(delta) {
+      globalHistory.go(delta);
+    }
+    var history = {
+      get action() {
+        return action;
+      },
+      get location() {
+        return location2;
+      },
+      createHref,
+      push,
+      replace,
+      go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        var unblock = blockers.push(blocker);
+        if (blockers.length === 1) {
+          window2.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+        return function() {
+          unblock();
+          if (!blockers.length) {
+            window2.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+          }
+        };
+      }
+    };
+    return history;
+  }
+  function promptBeforeUnload(event) {
+    event.preventDefault();
+    event.returnValue = "";
+  }
+  function createEvents() {
+    var handlers = [];
+    return {
+      get length() {
+        return handlers.length;
+      },
+      push: function push(fn) {
+        handlers.push(fn);
+        return function() {
+          handlers = handlers.filter(function(handler) {
+            return handler !== fn;
+          });
+        };
+      },
+      call: function call(arg) {
+        handlers.forEach(function(fn) {
+          return fn && fn(arg);
+        });
+      }
+    };
+  }
+  function createKey() {
+    return Math.random().toString(36).substr(2, 8);
+  }
+  function createPath(_ref) {
+    var _ref$pathname = _ref.pathname, pathname = _ref$pathname === void 0 ? "/" : _ref$pathname, _ref$search = _ref.search, search = _ref$search === void 0 ? "" : _ref$search, _ref$hash = _ref.hash, hash = _ref$hash === void 0 ? "" : _ref$hash;
+    if (search && search !== "?")
+      pathname += search.charAt(0) === "?" ? search : "?" + search;
+    if (hash && hash !== "#")
+      pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+    return pathname;
+  }
+  function parsePath(path) {
+    var parsedPath = {};
+    if (path) {
+      var hashIndex = path.indexOf("#");
+      if (hashIndex >= 0) {
+        parsedPath.hash = path.substr(hashIndex);
+        path = path.substr(0, hashIndex);
+      }
+      var searchIndex = path.indexOf("?");
+      if (searchIndex >= 0) {
+        parsedPath.search = path.substr(searchIndex);
+        path = path.substr(0, searchIndex);
+      }
+      if (path) {
+        parsedPath.pathname = path;
+      }
+    }
+    return parsedPath;
+  }
+
+  // node_modules/react-router/index.js
   var import_react3 = __toESM(require_react());
+  var NavigationContext = /* @__PURE__ */ (0, import_react3.createContext)(null);
+  if (true) {
+    NavigationContext.displayName = "Navigation";
+  }
+  var LocationContext = /* @__PURE__ */ (0, import_react3.createContext)(null);
+  if (true) {
+    LocationContext.displayName = "Location";
+  }
+  var RouteContext = /* @__PURE__ */ (0, import_react3.createContext)({
+    outlet: null,
+    matches: []
+  });
+  if (true) {
+    RouteContext.displayName = "Route";
+  }
+  function invariant(cond, message) {
+    if (!cond)
+      throw new Error(message);
+  }
+  function warning2(cond, message) {
+    if (!cond) {
+      if (typeof console !== "undefined")
+        console.warn(message);
+      try {
+        throw new Error(message);
+      } catch (e) {
+      }
+    }
+  }
+  var alreadyWarned = {};
+  function warningOnce(key, cond, message) {
+    if (!cond && !alreadyWarned[key]) {
+      alreadyWarned[key] = true;
+      true ? warning2(false, message) : void 0;
+    }
+  }
+  function matchRoutes(routes, locationArg, basename) {
+    if (basename === void 0) {
+      basename = "/";
+    }
+    let location2 = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+    let pathname = stripBasename(location2.pathname || "/", basename);
+    if (pathname == null) {
+      return null;
+    }
+    let branches = flattenRoutes(routes);
+    rankRouteBranches(branches);
+    let matches = null;
+    for (let i2 = 0; matches == null && i2 < branches.length; ++i2) {
+      matches = matchRouteBranch(branches[i2], pathname);
+    }
+    return matches;
+  }
+  function flattenRoutes(routes, branches, parentsMeta, parentPath) {
+    if (branches === void 0) {
+      branches = [];
+    }
+    if (parentsMeta === void 0) {
+      parentsMeta = [];
+    }
+    if (parentPath === void 0) {
+      parentPath = "";
+    }
+    routes.forEach((route, index) => {
+      let meta = {
+        relativePath: route.path || "",
+        caseSensitive: route.caseSensitive === true,
+        childrenIndex: index,
+        route
+      };
+      if (meta.relativePath.startsWith("/")) {
+        !meta.relativePath.startsWith(parentPath) ? true ? invariant(false, 'Absolute route path "' + meta.relativePath + '" nested under path ' + ('"' + parentPath + '" is not valid. An absolute child route path ') + "must start with the combined path of all its parent routes.") : invariant(false) : void 0;
+        meta.relativePath = meta.relativePath.slice(parentPath.length);
+      }
+      let path = joinPaths([parentPath, meta.relativePath]);
+      let routesMeta = parentsMeta.concat(meta);
+      if (route.children && route.children.length > 0) {
+        !(route.index !== true) ? true ? invariant(false, "Index routes must not have child routes. Please remove " + ('all child routes from route path "' + path + '".')) : invariant(false) : void 0;
+        flattenRoutes(route.children, branches, routesMeta, path);
+      }
+      if (route.path == null && !route.index) {
+        return;
+      }
+      branches.push({
+        path,
+        score: computeScore(path, route.index),
+        routesMeta
+      });
+    });
+    return branches;
+  }
+  function rankRouteBranches(branches) {
+    branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
+  }
+  var paramRe = /^:\w+$/;
+  var dynamicSegmentValue = 3;
+  var indexRouteValue = 2;
+  var emptySegmentValue = 1;
+  var staticSegmentValue = 10;
+  var splatPenalty = -2;
+  var isSplat = (s) => s === "*";
+  function computeScore(path, index) {
+    let segments = path.split("/");
+    let initialScore = segments.length;
+    if (segments.some(isSplat)) {
+      initialScore += splatPenalty;
+    }
+    if (index) {
+      initialScore += indexRouteValue;
+    }
+    return segments.filter((s) => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+  }
+  function compareIndexes(a, b) {
+    let siblings = a.length === b.length && a.slice(0, -1).every((n, i2) => n === b[i2]);
+    return siblings ? a[a.length - 1] - b[b.length - 1] : 0;
+  }
+  function matchRouteBranch(branch, pathname) {
+    let {
+      routesMeta
+    } = branch;
+    let matchedParams = {};
+    let matchedPathname = "/";
+    let matches = [];
+    for (let i2 = 0; i2 < routesMeta.length; ++i2) {
+      let meta = routesMeta[i2];
+      let end = i2 === routesMeta.length - 1;
+      let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+      let match = matchPath({
+        path: meta.relativePath,
+        caseSensitive: meta.caseSensitive,
+        end
+      }, remainingPathname);
+      if (!match)
+        return null;
+      Object.assign(matchedParams, match.params);
+      let route = meta.route;
+      matches.push({
+        params: matchedParams,
+        pathname: joinPaths([matchedPathname, match.pathname]),
+        pathnameBase: normalizePathname(joinPaths([matchedPathname, match.pathnameBase])),
+        route
+      });
+      if (match.pathnameBase !== "/") {
+        matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+      }
+    }
+    return matches;
+  }
+  function matchPath(pattern, pathname) {
+    if (typeof pattern === "string") {
+      pattern = {
+        path: pattern,
+        caseSensitive: false,
+        end: true
+      };
+    }
+    let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+    let match = pathname.match(matcher);
+    if (!match)
+      return null;
+    let matchedPathname = match[0];
+    let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+    let captureGroups = match.slice(1);
+    let params = paramNames.reduce((memo, paramName, index) => {
+      if (paramName === "*") {
+        let splatValue = captureGroups[index] || "";
+        pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+      }
+      memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "", paramName);
+      return memo;
+    }, {});
+    return {
+      params,
+      pathname: matchedPathname,
+      pathnameBase,
+      pattern
+    };
+  }
+  function compilePath(path, caseSensitive, end) {
+    if (caseSensitive === void 0) {
+      caseSensitive = false;
+    }
+    if (end === void 0) {
+      end = true;
+    }
+    true ? warning2(path === "*" || !path.endsWith("*") || path.endsWith("/*"), 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".')) : void 0;
+    let paramNames = [];
+    let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_, paramName) => {
+      paramNames.push(paramName);
+      return "([^\\/]+)";
+    });
+    if (path.endsWith("*")) {
+      paramNames.push("*");
+      regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
+    } else {
+      regexpSource += end ? "\\/*$" : "(?:(?=[.~-]|%[0-9A-F]{2})|\\b|\\/|$)";
+    }
+    let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
+    return [matcher, paramNames];
+  }
+  function safelyDecodeURIComponent(value2, paramName) {
+    try {
+      return decodeURIComponent(value2);
+    } catch (error) {
+      true ? warning2(false, 'The value for the URL param "' + paramName + '" will not be decoded because' + (' the string "' + value2 + '" is a malformed URL segment. This is probably') + (" due to a bad percent encoding (" + error + ").")) : void 0;
+      return value2;
+    }
+  }
+  function resolvePath(to, fromPathname) {
+    if (fromPathname === void 0) {
+      fromPathname = "/";
+    }
+    let {
+      pathname: toPathname,
+      search = "",
+      hash = ""
+    } = typeof to === "string" ? parsePath(to) : to;
+    let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+    return {
+      pathname,
+      search: normalizeSearch(search),
+      hash: normalizeHash(hash)
+    };
+  }
+  function resolvePathname(relativePath, fromPathname) {
+    let segments = fromPathname.replace(/\/+$/, "").split("/");
+    let relativeSegments = relativePath.split("/");
+    relativeSegments.forEach((segment) => {
+      if (segment === "..") {
+        if (segments.length > 1)
+          segments.pop();
+      } else if (segment !== ".") {
+        segments.push(segment);
+      }
+    });
+    return segments.length > 1 ? segments.join("/") : "/";
+  }
+  function resolveTo(toArg, routePathnames, locationPathname) {
+    let to = typeof toArg === "string" ? parsePath(toArg) : toArg;
+    let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname;
+    let from;
+    if (toPathname == null) {
+      from = locationPathname;
+    } else {
+      let routePathnameIndex = routePathnames.length - 1;
+      if (toPathname.startsWith("..")) {
+        let toSegments = toPathname.split("/");
+        while (toSegments[0] === "..") {
+          toSegments.shift();
+          routePathnameIndex -= 1;
+        }
+        to.pathname = toSegments.join("/");
+      }
+      from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+    }
+    let path = resolvePath(to, from);
+    if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+      path.pathname += "/";
+    }
+    return path;
+  }
+  function getToPathname(to) {
+    return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? parsePath(to).pathname : to.pathname;
+  }
+  function stripBasename(pathname, basename) {
+    if (basename === "/")
+      return pathname;
+    if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+      return null;
+    }
+    let nextChar = pathname.charAt(basename.length);
+    if (nextChar && nextChar !== "/") {
+      return null;
+    }
+    return pathname.slice(basename.length) || "/";
+  }
+  var joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
+  var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+  var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+  var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+  function useHref(to) {
+    !useInRouterContext() ? true ? invariant(
+      false,
+      "useHref() may be used only in the context of a <Router> component."
+    ) : invariant(false) : void 0;
+    let {
+      basename,
+      navigator: navigator2
+    } = (0, import_react3.useContext)(NavigationContext);
+    let {
+      hash,
+      pathname,
+      search
+    } = useResolvedPath(to);
+    let joinedPathname = pathname;
+    if (basename !== "/") {
+      let toPathname = getToPathname(to);
+      let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+      joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+    }
+    return navigator2.createHref({
+      pathname: joinedPathname,
+      search,
+      hash
+    });
+  }
+  function useInRouterContext() {
+    return (0, import_react3.useContext)(LocationContext) != null;
+  }
+  function useLocation() {
+    !useInRouterContext() ? true ? invariant(
+      false,
+      "useLocation() may be used only in the context of a <Router> component."
+    ) : invariant(false) : void 0;
+    return (0, import_react3.useContext)(LocationContext).location;
+  }
+  function useNavigate() {
+    !useInRouterContext() ? true ? invariant(
+      false,
+      "useNavigate() may be used only in the context of a <Router> component."
+    ) : invariant(false) : void 0;
+    let {
+      basename,
+      navigator: navigator2
+    } = (0, import_react3.useContext)(NavigationContext);
+    let {
+      matches
+    } = (0, import_react3.useContext)(RouteContext);
+    let {
+      pathname: locationPathname
+    } = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
+    let activeRef = (0, import_react3.useRef)(false);
+    (0, import_react3.useEffect)(() => {
+      activeRef.current = true;
+    });
+    let navigate = (0, import_react3.useCallback)(function(to, options) {
+      if (options === void 0) {
+        options = {};
+      }
+      true ? warning2(activeRef.current, "You should call navigate() in a React.useEffect(), not when your component is first rendered.") : void 0;
+      if (!activeRef.current)
+        return;
+      if (typeof to === "number") {
+        navigator2.go(to);
+        return;
+      }
+      let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+      if (basename !== "/") {
+        path.pathname = joinPaths([basename, path.pathname]);
+      }
+      (!!options.replace ? navigator2.replace : navigator2.push)(path, options.state);
+    }, [basename, navigator2, routePathnamesJson, locationPathname]);
+    return navigate;
+  }
+  function useParams() {
+    let {
+      matches
+    } = (0, import_react3.useContext)(RouteContext);
+    let routeMatch = matches[matches.length - 1];
+    return routeMatch ? routeMatch.params : {};
+  }
+  function useResolvedPath(to) {
+    let {
+      matches
+    } = (0, import_react3.useContext)(RouteContext);
+    let {
+      pathname: locationPathname
+    } = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
+    return (0, import_react3.useMemo)(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+  }
+  function useRoutes(routes, locationArg) {
+    !useInRouterContext() ? true ? invariant(
+      false,
+      "useRoutes() may be used only in the context of a <Router> component."
+    ) : invariant(false) : void 0;
+    let {
+      matches: parentMatches
+    } = (0, import_react3.useContext)(RouteContext);
+    let routeMatch = parentMatches[parentMatches.length - 1];
+    let parentParams = routeMatch ? routeMatch.params : {};
+    let parentPathname = routeMatch ? routeMatch.pathname : "/";
+    let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+    let parentRoute = routeMatch && routeMatch.route;
+    if (true) {
+      let parentPath = parentRoute && parentRoute.path || "";
+      warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ('"' + parentPathname + '" (under <Route path="' + parentPath + '">) but the ') + `parent route path has no trailing "*". This means if you navigate deeper, the parent won't match anymore and therefore the child routes will never render.
+
+` + ('Please change the parent <Route path="' + parentPath + '"> to <Route ') + ('path="' + (parentPath === "/" ? "*" : parentPath + "/*") + '">.'));
+    }
+    let locationFromContext = useLocation();
+    let location2;
+    if (locationArg) {
+      var _parsedLocationArg$pa;
+      let parsedLocationArg = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+      !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? true ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, the location pathname must begin with the portion of the URL pathname that was " + ('matched by all parent routes. The current pathname base is "' + parentPathnameBase + '" ') + ('but pathname "' + parsedLocationArg.pathname + '" was given in the `location` prop.')) : invariant(false) : void 0;
+      location2 = parsedLocationArg;
+    } else {
+      location2 = locationFromContext;
+    }
+    let pathname = location2.pathname || "/";
+    let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+    let matches = matchRoutes(routes, {
+      pathname: remainingPathname
+    });
+    if (true) {
+      true ? warning2(parentRoute || matches != null, 'No routes matched location "' + location2.pathname + location2.search + location2.hash + '" ') : void 0;
+      true ? warning2(matches == null || matches[matches.length - 1].route.element !== void 0, 'Matched leaf route at location "' + location2.pathname + location2.search + location2.hash + '" does not have an element. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.') : void 0;
+    }
+    return _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
+      params: Object.assign({}, parentParams, match.params),
+      pathname: joinPaths([parentPathnameBase, match.pathname]),
+      pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+    })), parentMatches);
+  }
+  function _renderMatches(matches, parentMatches) {
+    if (parentMatches === void 0) {
+      parentMatches = [];
+    }
+    if (matches == null)
+      return null;
+    return matches.reduceRight((outlet, match, index) => {
+      return /* @__PURE__ */ (0, import_react3.createElement)(RouteContext.Provider, {
+        children: match.route.element !== void 0 ? match.route.element : outlet,
+        value: {
+          outlet,
+          matches: parentMatches.concat(matches.slice(0, index + 1))
+        }
+      });
+    }, null);
+  }
+  function Route(_props) {
+    true ? invariant(false, "A <Route> is only ever to be used as the child of <Routes> element, never rendered directly. Please wrap your <Route> in a <Routes>.") : invariant(false);
+  }
+  function Router(_ref3) {
+    let {
+      basename: basenameProp = "/",
+      children = null,
+      location: locationProp,
+      navigationType = Action.Pop,
+      navigator: navigator2,
+      static: staticProp = false
+    } = _ref3;
+    !!useInRouterContext() ? true ? invariant(false, "You cannot render a <Router> inside another <Router>. You should never have more than one in your app.") : invariant(false) : void 0;
+    let basename = normalizePathname(basenameProp);
+    let navigationContext = (0, import_react3.useMemo)(() => ({
+      basename,
+      navigator: navigator2,
+      static: staticProp
+    }), [basename, navigator2, staticProp]);
+    if (typeof locationProp === "string") {
+      locationProp = parsePath(locationProp);
+    }
+    let {
+      pathname = "/",
+      search = "",
+      hash = "",
+      state = null,
+      key = "default"
+    } = locationProp;
+    let location2 = (0, import_react3.useMemo)(() => {
+      let trailingPathname = stripBasename(pathname, basename);
+      if (trailingPathname == null) {
+        return null;
+      }
+      return {
+        pathname: trailingPathname,
+        search,
+        hash,
+        state,
+        key
+      };
+    }, [basename, pathname, search, hash, state, key]);
+    true ? warning2(location2 != null, '<Router basename="' + basename + '"> is not able to match the URL ' + ('"' + pathname + search + hash + '" because it does not start with the ') + "basename, so the <Router> won't render anything.") : void 0;
+    if (location2 == null) {
+      return null;
+    }
+    return /* @__PURE__ */ (0, import_react3.createElement)(NavigationContext.Provider, {
+      value: navigationContext
+    }, /* @__PURE__ */ (0, import_react3.createElement)(LocationContext.Provider, {
+      children,
+      value: {
+        location: location2,
+        navigationType
+      }
+    }));
+  }
+  function Routes(_ref4) {
+    let {
+      children,
+      location: location2
+    } = _ref4;
+    return useRoutes(createRoutesFromChildren(children), location2);
+  }
+  function createRoutesFromChildren(children) {
+    let routes = [];
+    import_react3.Children.forEach(children, (element) => {
+      if (!/* @__PURE__ */ (0, import_react3.isValidElement)(element)) {
+        return;
+      }
+      if (element.type === import_react3.Fragment) {
+        routes.push.apply(routes, createRoutesFromChildren(element.props.children));
+        return;
+      }
+      !(element.type === Route) ? true ? invariant(false, "[" + (typeof element.type === "string" ? element.type : element.type.name) + "] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>") : invariant(false) : void 0;
+      let route = {
+        caseSensitive: element.props.caseSensitive,
+        element: element.props.element,
+        index: element.props.index,
+        path: element.props.path
+      };
+      if (element.props.children) {
+        route.children = createRoutesFromChildren(element.props.children);
+      }
+      routes.push(route);
+    });
+    return routes;
+  }
+
+  // node_modules/react-router-dom/index.js
+  function _extends2() {
+    _extends2 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends2.apply(this, arguments);
+  }
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var _excluded = ["onClick", "reloadDocument", "replace", "state", "target", "to"];
+  var _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"];
+  function BrowserRouter(_ref) {
+    let {
+      basename,
+      children,
+      window: window2
+    } = _ref;
+    let historyRef = (0, import_react4.useRef)();
+    if (historyRef.current == null) {
+      historyRef.current = createBrowserHistory({
+        window: window2
+      });
+    }
+    let history = historyRef.current;
+    let [state, setState] = (0, import_react4.useState)({
+      action: history.action,
+      location: history.location
+    });
+    (0, import_react4.useLayoutEffect)(() => history.listen(setState), [history]);
+    return /* @__PURE__ */ (0, import_react4.createElement)(Router, {
+      basename,
+      children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history
+    });
+  }
+  function HistoryRouter(_ref3) {
+    let {
+      basename,
+      children,
+      history
+    } = _ref3;
+    const [state, setState] = (0, import_react4.useState)({
+      action: history.action,
+      location: history.location
+    });
+    (0, import_react4.useLayoutEffect)(() => history.listen(setState), [history]);
+    return /* @__PURE__ */ (0, import_react4.createElement)(Router, {
+      basename,
+      children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history
+    });
+  }
+  if (true) {
+    HistoryRouter.displayName = "unstable_HistoryRouter";
+  }
+  function isModifiedEvent(event) {
+    return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+  }
+  var Link = /* @__PURE__ */ (0, import_react4.forwardRef)(function LinkWithRef(_ref4, ref) {
+    let {
+      onClick,
+      reloadDocument,
+      replace = false,
+      state,
+      target,
+      to
+    } = _ref4, rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
+    let href = useHref(to);
+    let internalOnClick = useLinkClickHandler(to, {
+      replace,
+      state,
+      target
+    });
+    function handleClick(event) {
+      if (onClick)
+        onClick(event);
+      if (!event.defaultPrevented && !reloadDocument) {
+        internalOnClick(event);
+      }
+    }
+    return /* @__PURE__ */ (0, import_react4.createElement)("a", _extends2({}, rest, {
+      href,
+      onClick: handleClick,
+      ref,
+      target
+    }));
+  });
+  if (true) {
+    Link.displayName = "Link";
+  }
+  var NavLink = /* @__PURE__ */ (0, import_react4.forwardRef)(function NavLinkWithRef(_ref5, ref) {
+    let {
+      "aria-current": ariaCurrentProp = "page",
+      caseSensitive = false,
+      className: classNameProp = "",
+      end = false,
+      style: styleProp,
+      to,
+      children
+    } = _ref5, rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
+    let location2 = useLocation();
+    let path = useResolvedPath(to);
+    let locationPathname = location2.pathname;
+    let toPathname = path.pathname;
+    if (!caseSensitive) {
+      locationPathname = locationPathname.toLowerCase();
+      toPathname = toPathname.toLowerCase();
+    }
+    let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
+    let ariaCurrent = isActive ? ariaCurrentProp : void 0;
+    let className;
+    if (typeof classNameProp === "function") {
+      className = classNameProp({
+        isActive
+      });
+    } else {
+      className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+    }
+    let style = typeof styleProp === "function" ? styleProp({
+      isActive
+    }) : styleProp;
+    return /* @__PURE__ */ (0, import_react4.createElement)(Link, _extends2({}, rest, {
+      "aria-current": ariaCurrent,
+      className,
+      ref,
+      style,
+      to
+    }), typeof children === "function" ? children({
+      isActive
+    }) : children);
+  });
+  if (true) {
+    NavLink.displayName = "NavLink";
+  }
+  function useLinkClickHandler(to, _temp) {
+    let {
+      target,
+      replace: replaceProp,
+      state
+    } = _temp === void 0 ? {} : _temp;
+    let navigate = useNavigate();
+    let location2 = useLocation();
+    let path = useResolvedPath(to);
+    return (0, import_react4.useCallback)((event) => {
+      if (event.button === 0 && (!target || target === "_self") && !isModifiedEvent(event)) {
+        event.preventDefault();
+        let replace = !!replaceProp || createPath(location2) === createPath(path);
+        navigate(to, {
+          replace,
+          state
+        });
+      }
+    }, [location2, navigate, path, replaceProp, state, target, to]);
+  }
+
+  // src/components/room/index.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
+  function Room() {
+    const [message, setMessage] = (0, import_react5.useState)("");
+    const [messages, setMessages] = (0, import_react5.useState)([]);
+    const [isEmpty, setIsEmpty] = (0, import_react5.useState)(false);
+    const { store: { mainSocket } } = (0, import_react5.useContext)(SocketContext);
+    const { roomName } = useParams();
+    const onSendMessage = (e) => {
+      e.preventDefault();
+      if (!message) {
+        setIsEmpty(true);
+      } else {
+        mainSocket.emit("chat message", { message, roomName });
+        setIsEmpty(false);
+        setMessage("");
+      }
+    };
+    mainSocket.on("chat message", (msg) => {
+      const updated = [
+        ...messages,
+        { createdAt: new Date().toLocaleTimeString(), value: msg }
+      ];
+      setMessages(updated);
+    });
+    mainSocket.on("new user", (message2) => {
+      console.log(message2);
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+      onSubmit: onSendMessage,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+          id: "messages",
+          children: messages.map((message2) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+            children: `${message2.createdAt}: ${message2.value}`
+          }))
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+          id: "submit-container",
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+              type: "text",
+              name: "message",
+              value: message,
+              onChange: (e) => setMessage(e.target.value)
+            }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+              children: "Send Message"
+            }),
+            isEmpty && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+              className: "error-message",
+              children: "Cannot be empty."
+            })
+          ]
+        })
+      ]
+    });
+  }
 
   // src/components/lobby/index.tsx
-  var import_react4 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
 
   // src/components/lobby/_addRoom.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
@@ -26084,25 +27108,31 @@
   // src/components/lobby/index.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   function Lobby() {
-    const [roomName, setRoomName] = (0, import_react4.useState)("");
-    const [rooms, setRooms] = (0, import_react4.useState)([]);
-    const [error, setError] = (0, import_react4.useState)({ emptyRoomDetails: false });
-    const { store: { mainSocket }, addSockets } = (0, import_react4.useContext)(SocketContext);
+    const [roomName, setRoomName] = (0, import_react6.useState)("");
+    const [rooms, setRooms] = (0, import_react6.useState)([]);
+    const [error, setError] = (0, import_react6.useState)({ emptyRoomDetails: false });
+    const { store: { mainSocket }, addSockets } = (0, import_react6.useContext)(SocketContext);
+    const navigate = useNavigate();
     const onAddRoom = (e) => {
       e.preventDefault();
       if (!roomName) {
         setError({ emptyRoomDetails: true });
         return;
       }
-      const roomDetails = { roomName, creator: "User1", createdAt: new Date().toLocaleString(), occupants: 0 };
+      const roomDetails = { roomName, occupants: 1 };
       mainSocket.emit("add room", roomDetails);
-      setRooms([...rooms, roomDetails]);
-      setRoomName("");
-      setError({ emptyRoomDetails: false });
+      navigate(`/room/${roomName}`);
     };
+    mainSocket.on("existing rooms", (roomDetails) => {
+      setRooms(roomDetails);
+    });
     mainSocket.on("add room", (roomDetails) => {
       setRooms([...rooms, __spreadValues({}, roomDetails)]);
     });
+    const onJoinRoom = (roomName2) => {
+      mainSocket.emit("join room", { roomName: roomName2, username: "Harold" });
+      navigate(`/room/${roomName2}`);
+    };
     return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
       id: "lobby-page",
       children: [
@@ -26117,20 +27147,12 @@
           children: rooms.map((room) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
             className: "lobby-chatroom",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-                children: room.roomName
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+                children: `Room name: ${room.roomName} Occupants: ${room.occupants}`
               }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-                children: [
-                  "Created at: ",
-                  room.createdAt
-                ]
-              }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-                children: [
-                  "Occupants: ",
-                  room.occupants
-                ]
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+                onClick: () => onJoinRoom(room.roomName),
+                children: "join"
               })
             ]
           }))
@@ -26144,7 +27166,20 @@
   var App = () => {
     const { SocketProvider } = useSockets();
     return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocketProvider, {
-      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lobby, {})
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
+        children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+              index: true,
+              element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lobby, {})
+            }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+              path: "room/:roomName",
+              element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Room, {})
+            })
+          ]
+        })
+      })
     });
   };
   var root = (0, import_client.createRoot)(document.getElementById("root"));
@@ -26198,4 +27233,24 @@
  * @return {boolean} True if the event is supported.
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
+ */
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+/**
+ * React Router v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
  */

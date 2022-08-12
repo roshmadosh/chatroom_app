@@ -1,13 +1,13 @@
+import { LobbyTypes } from './'; 
+import { FormEventHandler } from 'react';
 
-import { LobbyState, LobbyStateSetter } from "."
-
+// --[types]-- //
 type AddRoomFormProps = {
-  error: LobbyState['error'],
-  onSubmit: React.FormEventHandler<HTMLFormElement>,
-  roomName: LobbyState['roomName']
-  setRoomName: LobbyStateSetter<LobbyState['roomName']>
-}
+  onSubmit: FormEventHandler<HTMLFormElement>,
+} & LobbyTypes;
 
+
+// --[start]-- //
 export function AddRoomForm({ onSubmit, roomName, setRoomName, error }: AddRoomFormProps) {
   
   return (

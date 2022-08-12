@@ -1,22 +1,28 @@
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import { useState, useContext } from "react";
 import { SocketContext } from "../../contexts";
 import { AddRoomForm } from "./_addRoom";
+import { StateSetters } from "../../types"; 
+import { useNavigate } from 'react-router-dom';
 
-export type LobbyStateSetter<T> = Dispatch<SetStateAction<T>>;
-export type LobbyState = {
+// --[types]-- //
+export type LobbyTypes = Partial<LobbyState & StateSetters<LobbyState>>;
+
+type LobbyState = {
   roomName: string,
-  roomDetails: { roomName: string, creator: string, createdAt: string, occupants: number },
+  roomDetails: { roomName: string, occupants: number },
   error: {
-    [errorType: string]: boolean
+    emptyRoomDetails: boolean;
   }
 }
 
+// --[start]-- //
 export function Lobby() {
   const [roomName, setRoomName] = useState<LobbyState['roomName']>('');
   const [rooms, setRooms] = useState<LobbyState['roomDetails'][]>([]);
   const [error, setError] = useState<LobbyState['error']>({ emptyRoomDetails: false })
 
   const { store: { mainSocket }, addSockets } = useContext(SocketContext);
+  const navigate = useNavigate();
 
   const onAddRoom = e => {
     e.preventDefault();
@@ -25,16 +31,25 @@ export function Lobby() {
       return;
     }
     // emit room details to main/lobby namespace so that all lobbies are updated in real time
-    const roomDetails = { roomName: roomName, creator: 'User1', createdAt: new Date().toLocaleString(), occupants: 0 }
+    const roomDetails: LobbyState['roomDetails'] = { roomName: roomName, occupants: 1 }
     mainSocket.emit('add room', roomDetails);
-    setRooms([...rooms, roomDetails]);
-    setRoomName('');
-    setError({ emptyRoomDetails: false });
+    // navigate to room
+    navigate(`/room/${roomName}`);
   }
+  // initial rooms
+  mainSocket.on('existing rooms', (roomDetails: LobbyState['roomDetails'][]) => {
+    setRooms(roomDetails);
+  })
 
   mainSocket.on('add room', (roomDetails: LobbyState['roomDetails']) => {
     setRooms([...rooms, { ...roomDetails }]);
   })
+
+  const onJoinRoom = (roomName: string) => {
+    // navigate user to chatroom page
+    mainSocket.emit('join room', { roomName, username: 'Harold' });
+    navigate(`/room/${roomName}`);
+  }
 
   return (
     <div id="lobby-page">
@@ -46,7 +61,11 @@ export function Lobby() {
       />
       <ul id="lobby-chatrooms">
         {rooms.map(room => (
-          <li className="lobby-chatroom"><span>{room.roomName}</span><span>Created at: {room.createdAt}</span><span>Occupants: {room.occupants}</span></li>
+          <li className="lobby-chatroom">
+            <p>{`Room name: ${room.roomName} Occupants: ${room.occupants}`}</p>
+            <button onClick={() => onJoinRoom(room.roomName)}>join</button>
+          </li>
+          
         ))}
       </ul>
     </div>

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { SocketContext } from '../../contexts';
+import { useParams, useNavigate } from 'react-router-dom'
 
 type DisplayedMessageType = {
   createdAt: string,
@@ -11,13 +12,14 @@ export function Room() {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const { store: { mainSocket } } = useContext(SocketContext);
+  const { roomName } = useParams();
   
   const onSendMessage = e => {
     e.preventDefault();
     if (!message) {
       setIsEmpty(true);
     } else {
-      mainSocket.emit('chat message', message);
+      mainSocket.emit('chat message', { message, roomName });
       setIsEmpty(false);
       setMessage('');
     }
@@ -30,6 +32,10 @@ export function Room() {
     ]
     
     setMessages(updated);
+  })
+
+  mainSocket.on('new user', message => {
+    console.log(message);
   })
 
   return (

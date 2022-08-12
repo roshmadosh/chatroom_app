@@ -1,23 +1,22 @@
 
 import { io } from 'socket.io-client';
 import { useCallback } from 'react';
-import { SocketContext } from '../contexts';
-import { SocketType } from '../types';
-
+import { SocketType, SocketContext } from '../contexts';
 
 /**
- * Creates web sockets and a context for accessing and updating them. Returns the provider for the context.
- * @param initialSockets // for additional namespaces
+ * Creates web sockets and initializes the socket context with getter and setter. Returns the provider for the socket context.
+ * @param initialSockets // for any additional namespaces
  * @returns 
  */
 export function useSockets(initialSockets?: SocketType[]) {
+
+  // init
+  initialSockets && addSockets(initialSockets);
+
   // creates store with initial socket
   const store = {
     mainSocket: useCallback(() => io(), [])(), // useCallback makes socket instance a singleton
   }
-
-  // creates any additional web sockets
-  initialSockets && addSockets(initialSockets);
 
   // handler for updating socket store.
   function addSockets(sockets: SocketType[]): void {
@@ -29,7 +28,7 @@ export function useSockets(initialSockets?: SocketType[]) {
   // provider for accessing sockets
   const SocketProvider = ({ children }) => {
     return (
-      <SocketContext.Provider value={{ addSockets, store }}>
+      <SocketContext.Provider value={{ store, addSockets }}>
         {children}
       </SocketContext.Provider>
     )

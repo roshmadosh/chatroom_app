@@ -1,6 +1,5 @@
 import { createContext } from "react";
 import { io } from 'socket.io-client';
-import { SocketType } from '../types';
 
 /**
  *  Separated contexts from hooks to make imports more semantically consistent,
@@ -11,9 +10,13 @@ import { SocketType } from '../types';
 
 // --[TYPES]-- //
 
-// an object containing keys with socket-type values
+export type SocketType = {
+  name: string,
+  path: string
+}
+
 type SocketContextType = {
-  store: {
+  store: { // an object containing keys with socket-type values
     [socket: string]: ReturnType<typeof io>,
   },
   addSockets: (sockets: SocketType[]) => void, 
