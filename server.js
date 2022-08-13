@@ -37,7 +37,15 @@ io.on('connection', (socket) => {
   })
 
   socket.on('chat message', chatObject => {
+    console.log('received chat');
     io.to(chatObject.roomName).emit('chat message', chatObject.message);
+  })
+
+  socket.on('leave room', roomName => {
+    console.log('in leave room');
+    socket.leave(roomName);
+    socket.to(roomName).emit('user left', `${socket.id} has left the chatroom.`);
+    io.emit('existing rooms', getActiveRooms());
   })
 });
 

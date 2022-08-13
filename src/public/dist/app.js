@@ -1026,11 +1026,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef3(initialValue) {
+          function useRef4(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect2(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1810,14 +1810,14 @@
           exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect2;
+          exports.useEffect = useEffect3;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect3;
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
-          exports.useRef = useRef3;
+          exports.useRef = useRef4;
           exports.useState = useState5;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -27019,8 +27019,31 @@
     const [message, setMessage] = (0, import_react5.useState)("");
     const [messages, setMessages] = (0, import_react5.useState)([]);
     const [isEmpty, setIsEmpty] = (0, import_react5.useState)(false);
+    const messagesRef = (0, import_react5.useRef)(messages);
     const { store: { mainSocket } } = (0, import_react5.useContext)(SocketContext);
     const { roomName } = useParams();
+    const navigate = useNavigate();
+    (0, import_react5.useEffect)(() => {
+      const logMessage = (message2) => {
+        console.log(message2);
+      };
+      const chatListener = (msg) => {
+        const updated = [
+          ...messagesRef.current,
+          { createdAt: new Date().toLocaleTimeString(), value: msg }
+        ];
+        messagesRef.current = updated;
+        setMessages(updated);
+      };
+      mainSocket.on("chat message", chatListener);
+      mainSocket.on("new user", logMessage);
+      mainSocket.on("user left", logMessage);
+      return () => {
+        mainSocket.off("chat message", chatListener);
+        mainSocket.off("new user", logMessage);
+        mainSocket.off("user left", logMessage);
+      };
+    }, []);
     const onSendMessage = (e) => {
       e.preventDefault();
       if (!message) {
@@ -27031,42 +27054,46 @@
         setMessage("");
       }
     };
-    mainSocket.on("chat message", (msg) => {
-      const updated = [
-        ...messages,
-        { createdAt: new Date().toLocaleTimeString(), value: msg }
-      ];
-      setMessages(updated);
-    });
-    mainSocket.on("new user", (message2) => {
-      console.log(message2);
-    });
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-      onSubmit: onSendMessage,
+    const onLeaveRoom = () => {
+      mainSocket.emit("leave room", roomName);
+      navigate("/");
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+      id: "room-page",
+      className: "page",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-          id: "messages",
-          children: messages.map((message2) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-            children: `${message2.createdAt}: ${message2.value}`
-          }))
-        }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-          id: "submit-container",
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+          onSubmit: onSendMessage,
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-              type: "text",
-              name: "message",
-              value: message,
-              onChange: (e) => setMessage(e.target.value)
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+              id: "messages",
+              children: messages.map((message2) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+                children: `${message2.createdAt}: ${message2.value}`
+              }))
             }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-              children: "Send Message"
-            }),
-            isEmpty && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-              className: "error-message",
-              children: "Cannot be empty."
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+              id: "submit-container",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+                  type: "text",
+                  name: "message",
+                  value: message,
+                  onChange: (e) => setMessage(e.target.value)
+                }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+                  children: "Send Message"
+                }),
+                isEmpty && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+                  className: "error-message",
+                  children: "Cannot be empty."
+                })
+              ]
             })
           ]
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+          onClick: onLeaveRoom,
+          children: "Leave Room"
         })
       ]
     });
